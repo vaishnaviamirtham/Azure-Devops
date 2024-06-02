@@ -1,15 +1,15 @@
 trigger:
-        - main
+- main
 
-        pool:
-          vmImage: 'ubuntu-latest'
-        variables:
-          imageName: 'demo-pipelines-docker'
+pool: 
+  vmImage: ubuntu-latest
 
-        steps:
-        - task: Docker@2
-          displayName: Build the demo image
-          inputs:
-            repository: $(imageName)
-            command: build
-            Dockerfile: app/Dockerfile
+jobs:
+- job: PreWork
+  steps:
+  - script: "Do pre-work"
+
+- job: PostWork
+  pool: windows-latest
+  steps:
+  - script: "Do post-work using a different hosted image"
